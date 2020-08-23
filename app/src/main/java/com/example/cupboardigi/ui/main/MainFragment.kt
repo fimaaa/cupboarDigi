@@ -27,6 +27,10 @@ class MainFragment : BaseFragment<MainFragmentBinding,MainViewModel>() {
 
     override fun onInitialization() {
         super.onInitialization()
+
+    }
+
+    override fun onReadyAction() {
         viewModel.getStorage()
     }
 

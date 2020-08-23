@@ -29,6 +29,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<out Any>> : F
     @LayoutRes
     abstract fun setLayout(): Int
     open fun onInitialization() = Unit
+    abstract fun onReadyAction()
 
     private fun viewModels(clazz: KClass<V>, factoryProducer: (() -> ViewModelProvider.Factory)? = null): Lazy<V> {
         return ViewModelLazy(clazz, { viewModelStore }, factoryProducer ?: { defaultViewModelProviderFactory })
@@ -65,6 +66,11 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<out Any>> : F
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onInitialization()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        onReadyAction()
     }
 
     override fun onDestroy() {

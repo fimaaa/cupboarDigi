@@ -3,7 +3,7 @@ package com.example.cupboardigi.data.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-class Storage {
+object Storage {
     data class Response(
         val code: Int,
         val `data`: MutableList<Data?>?,
