@@ -10,7 +10,10 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import com.example.cupboardigi.BR
+import com.example.cupboardigi.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -22,6 +25,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<out Any>> : F
 
     lateinit var dataBinding: T
     val viewModel: V  by lazy { initViewModel() }
+    val mainNavController: NavController? by lazy { activity?.findNavController(R.id.nav_main) }
 
     private lateinit var job: Job
 
@@ -29,8 +33,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<out Any>> : F
     @LayoutRes
     abstract fun setLayout(): Int
     open fun onInitialization() = Unit
-    abstract fun onReadyAction()
-
     private fun viewModels(clazz: KClass<V>, factoryProducer: (() -> ViewModelProvider.Factory)? = null): Lazy<V> {
         return ViewModelLazy(clazz, { viewModelStore }, factoryProducer ?: { defaultViewModelProviderFactory })
     }
@@ -45,6 +47,8 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<out Any>> : F
 
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
+
+    abstract fun onReadyAction()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

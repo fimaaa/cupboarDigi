@@ -76,11 +76,6 @@ object BasicNetworkModule {
     @Reusable
     @JvmStatic
     internal fun provideRetrofitInterface(): Retrofit {
-//        return Retrofit.Builder()
-//            .baseUrl(BuildConfig.BASE_URL)
-//            .addConverterFactory(MoshiConverterFactory.create())
-//            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-//            .build()
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(provideOkHttpClient())

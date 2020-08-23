@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    >
-    <data>
-        <variable
-            name="viewModel"
-            type="com.example.cupboardigi.base.BaseViewModel" />
-    </data>
-    <FrameLayout
-        android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/colorGreenTeal"
+    tools:context=".application.MainActivity">
+    <fragment
+        android:id="@+id/nav_main"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity" />
-</layout>
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_main" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
