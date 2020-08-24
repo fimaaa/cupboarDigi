@@ -3,8 +3,8 @@ package com.example.cupboardigi.base
 import android.app.Application
 import androidx.annotation.CallSuper
 import androidx.lifecycle.AndroidViewModel
-import com.example.cupboardigi.di.DaggerViewModelInjector
-import com.example.cupboardigi.di.ViewModelInjector
+import com.example.cupboardigi.di.injection.DaggerViewModelInjector
+import com.example.cupboardigi.di.injection.ViewModelInjector
 import com.example.cupboardigi.di.module.BasicNetworkModule
 import com.example.cupboardigi.ui.menu.MenuViewModel
 import com.example.cupboardigi.ui.splash.SplashViewModel

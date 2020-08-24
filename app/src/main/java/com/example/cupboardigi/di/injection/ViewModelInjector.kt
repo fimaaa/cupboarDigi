@@ -1,4 +1,4 @@
-package com.example.cupboardigi.di
+package com.example.cupboardigi.di.injection
 
 import com.example.cupboardigi.di.module.BasicNetworkModule
 import com.example.cupboardigi.ui.menu.MenuViewModel

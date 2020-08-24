@@ -14,6 +14,8 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.cupboardigi.BR
 import com.example.cupboardigi.R
+import com.example.cupboardigi.di.injection.ViewModelFactory
+import com.example.cupboardigi.ui.menu.MenuFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -33,6 +35,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<out Any>> : F
     @LayoutRes
     abstract fun setLayout(): Int
     open fun onInitialization() = Unit
+    open fun onObserveAction() = Unit
     private fun viewModels(clazz: KClass<V>, factoryProducer: (() -> ViewModelProvider.Factory)? = null): Lazy<V> {
         return ViewModelLazy(clazz, { viewModelStore }, factoryProducer ?: { defaultViewModelProviderFactory })
     }
@@ -42,7 +45,12 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<out Any>> : F
         return v
     }
 
-    private fun getViewModelFactory(): (() -> ViewModelProvider.Factory)? = null
+    private fun getViewModelFactory(): (() -> ViewModelProvider.Factory)? {
+        return when(this){
+            is MenuFragment -> {{ViewModelFactory(requireActivity())}}
+            else -> null
+        }
+    }
     protected abstract fun getViewModelClass(): KClass<V>
 
     override val coroutineContext: CoroutineContext
@@ -70,6 +78,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<out Any>> : F
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onInitialization()
+        onObserveAction()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
