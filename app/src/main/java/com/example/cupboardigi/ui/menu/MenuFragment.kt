@@ -17,7 +17,12 @@ class MenuFragment : BaseFragment<FragmentMenuBinding,MenuViewModel>() {
         super.onObserveAction()
         viewModel.itemStorageItem.observe(this, Observer {
             for(x in it.indices){
-                println("TAG item = ${it[x].nameItem}")
+                println("TAG Storage ke-$x")
+                println("TAG StorageID = ${it[x].id}")
+                println("TAG item Type= ${it[x].typeItem}")
+                println("TAG nama Type= ${it[x].nameType}")
+                println("TAG Storage = ${it[x].nameItem}")
+
             }
         })
         viewModel.responseStorage.observe(this, Observer {

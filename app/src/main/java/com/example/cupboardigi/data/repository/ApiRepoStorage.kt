@@ -2,7 +2,6 @@ package com.example.cupboardigi.data.repository
 
 import com.example.cupboardigi.data.endpoint.ApiServiceStorage
 import com.example.cupboardigi.data.model.dao.PostDao
-import com.example.cupboardigi.data.model.data.item.ItemStorage
 import com.example.cupboardigi.data.model.data.response.ResponseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -13,6 +12,7 @@ class ApiRepoStorage(
 ) {
 
     val storeageItem = storageDao.findAllStorage()
+    val typeItem = storageDao.findAllItemType()
     suspend fun getStorage(): ResponseStorage.Response =
         withContext(Dispatchers.IO) {
             val response = apiServiceStorage.getStorageAsync().await()
