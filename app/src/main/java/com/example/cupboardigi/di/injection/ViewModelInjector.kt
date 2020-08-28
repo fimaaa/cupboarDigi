@@ -1,7 +1,8 @@
 package com.example.cupboardigi.di.injection
 
 import com.example.cupboardigi.di.module.BasicNetworkModule
-import com.example.cupboardigi.ui.menu.MenuViewModel
+import com.example.cupboardigi.ui.menu.ContainerMenuViewModel
+import com.example.cupboardigi.ui.menu.board.MenuBoardViewModel
 import com.example.cupboardigi.ui.splash.SplashViewModel
 import dagger.Component
 import javax.inject.Singleton
@@ -10,8 +11,9 @@ import javax.inject.Singleton
 @Component(modules = [(BasicNetworkModule::class)])
 interface  ViewModelInjector {
 
-    fun inject(menuViewModel: MenuViewModel)
+    fun inject(containerMenuViewModel: ContainerMenuViewModel)
     fun inject(splashViewModel: SplashViewModel)
+    fun inject(menuBoardViewModel: MenuBoardViewModel)
 
 
     @Component.Builder

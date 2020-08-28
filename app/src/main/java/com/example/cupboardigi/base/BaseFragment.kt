@@ -15,7 +15,7 @@ import androidx.navigation.findNavController
 import com.example.cupboardigi.BR
 import com.example.cupboardigi.R
 import com.example.cupboardigi.di.injection.ViewModelFactory
-import com.example.cupboardigi.ui.menu.MenuFragment
+import com.example.cupboardigi.ui.menu.board.MenuBoardFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -47,7 +47,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<out Any>> : F
 
     private fun getViewModelFactory(): (() -> ViewModelProvider.Factory)? {
         return when(this){
-            is MenuFragment -> {{ViewModelFactory(requireActivity())}}
+            is MenuBoardFragment -> {{ViewModelFactory(requireActivity())}}
             else -> null
         }
     }

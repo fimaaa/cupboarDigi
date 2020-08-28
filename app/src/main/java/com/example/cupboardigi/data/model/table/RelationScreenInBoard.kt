@@ -1,0 +1,15 @@
+package com.example.cupboardigi.data.model.table
+
+import androidx.room.Embedded
+import androidx.room.Relation
+import com.example.cupboardigi.data.model.item.ItemBoard
+import com.example.cupboardigi.data.model.item.ItemScreen
+
+data class RelationScreenInBoard (
+    @Embedded val board: ItemBoard,
+    @Relation(
+        parentColumn = "idBoard",
+        entityColumn = "id_board_in_screen"
+    )
+    val screen: List<ItemScreen>
+)

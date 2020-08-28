@@ -1,6 +1,6 @@
 package com.example.cupboardigi.data.endpoint
 
-import com.example.cupboardigi.data.model.data.response.ResponseStorage
+import com.example.cupboardigi.data.model.response.ResponseStorage
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 

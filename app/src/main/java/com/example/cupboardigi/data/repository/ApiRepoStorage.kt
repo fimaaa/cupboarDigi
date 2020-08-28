@@ -1,8 +1,8 @@
 package com.example.cupboardigi.data.repository
 
 import com.example.cupboardigi.data.endpoint.ApiServiceStorage
-import com.example.cupboardigi.data.model.dao.PostDao
-import com.example.cupboardigi.data.model.data.response.ResponseStorage
+import com.example.cupboardigi.database.dao.PostDao
+import com.example.cupboardigi.data.model.response.ResponseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

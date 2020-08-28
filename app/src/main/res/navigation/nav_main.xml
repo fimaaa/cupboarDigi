@@ -17,6 +17,6 @@
 
     <fragment
         android:id="@+id/MainFragment"
-        android:name="com.example.cupboardigi.ui.menu.MenuFragment"
-        tools:layout="@layout/fragment_menu"/>
+        android:name="com.example.cupboardigi.ui.menu.ContainerMenuFragment"
+        tools:layout="@layout/fragment_container_menu"/>
 </navigation>

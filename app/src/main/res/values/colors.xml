@@ -8,5 +8,7 @@
     <color name="colorGreenTeal">#0eb37e</color>
     <color name="colorDarkGrey">#191a1a</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorNaturalWood">#caa472</color>
+    <color name="colorDarkWood">#b88645</color>
 
 </resources>
