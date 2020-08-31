@@ -9,9 +9,8 @@ import com.example.cupboardigi.data.model.item.ItemStorageUser
 data class RelationItemInScreen (
     @Embedded val screen: ItemScreen,
     @Relation(
-        parentColumn = "idScreen",
-        entityColumn = "id_board_in_screen",
-        associateBy = Junction(CrossRefItemScreen::class)
+        parentColumn = "id_screen",
+        entityColumn = "id_item_user"
     )
     val storageUser: List<ItemStorageUser>
 )

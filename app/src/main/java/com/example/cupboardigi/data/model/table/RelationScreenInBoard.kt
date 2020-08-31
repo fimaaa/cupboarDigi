@@ -8,7 +8,7 @@ import com.example.cupboardigi.data.model.item.ItemScreen
 data class RelationScreenInBoard (
     @Embedded val board: ItemBoard,
     @Relation(
-        parentColumn = "idBoard",
+        parentColumn = "id_board",
         entityColumn = "id_board_in_screen"
     )
     val screen: List<ItemScreen>

@@ -13,7 +13,6 @@ data class ItemStorageUser(
     val idItemUser: Long,
     @Embedded
     val idStorage: ItemStorage,
-    val qty: Int,
-    @ColumnInfo(name = "qty_in_board")
-    val qtyInBoard: Int
+    @ColumnInfo(name = "id_screen")
+    val screenID: Long
 )

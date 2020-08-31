@@ -11,4 +11,6 @@
     <color name="colorNaturalWood">#caa472</color>
     <color name="colorDarkWood">#b88645</color>
 
+    <color name="colorTransparent">#80000000</color>
+
 </resources>

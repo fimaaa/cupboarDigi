@@ -11,10 +11,7 @@ data class ItemStorage(
     @ColumnInfo(name = "id_storage")
     val idStorage: Long,
     @Embedded
-    val typeItem: ItemType,
-    val image: String,
-    @ColumnInfo(name = "name_item")
-    val nameItem: String,
+    val typeItem: ItemSeries,
     @ColumnInfo(name = "volume_item")
     val volumeItem: Int
 )

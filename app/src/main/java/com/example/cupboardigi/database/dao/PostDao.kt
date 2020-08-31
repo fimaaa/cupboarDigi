@@ -2,11 +2,8 @@ package com.example.cupboardigi.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.cupboardigi.data.model.item.ItemBoard
-import com.example.cupboardigi.data.model.item.ItemScreen
-import com.example.cupboardigi.data.model.item.ItemStorage
-import com.example.cupboardigi.data.model.item.ItemType
-import com.example.cupboardigi.data.model.table.CrossRefItemScreen
+import com.example.cupboardigi.data.model.item.*
+import com.example.cupboardigi.data.model.table.RelationItemInScreen
 import com.example.cupboardigi.data.model.table.RelationScreenInBoard
 
 @Dao
@@ -20,6 +17,15 @@ interface PostDao {
     @Query("SELECT * FROM item_type")
     fun findAllItemType(): LiveData<List<ItemType>>
 
+    // ItemSeries
+    @Transaction
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addItemSeries(itemSeries: List<ItemSeries>)
+
+    @Transaction
+    @Query("SELECT * FROM item_series")
+    fun findAllItemSeries(): LiveData<List<ItemSeries>>
+
     // ItemStorage
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -29,6 +35,34 @@ interface PostDao {
     @Query("SELECT * FROM item_storage")
     fun findAllStorage(): LiveData<List<ItemStorage>>
 
+    // ItemStorageUser
+    @Transaction
+    fun addStorageUser(itemStorage: ItemStorageUser){
+        if (findStorageUser(itemStorage.idItemUser).value?.isNotEmpty() == true) {
+            updateStorageUser(itemStorage)
+        } else {
+            val list = listOf(
+                itemStorage
+            )
+            addAllStorageUser(list)
+        }
+    }
+
+    @Transaction
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addAllStorageUser(itemStorages: List<ItemStorageUser>?)
+
+    @Transaction
+    @Query("SELECT * FROM item_storage_user")
+    fun findAllStorageUser(): LiveData<List<ItemStorageUser>>
+
+    @Transaction
+    @Query("SELECT * FROM item_storage_user WHERE id_item_user=(:idStorageUser)")
+    fun findStorageUser(idStorageUser: Long): LiveData<List<ItemStorageUser>>
+
+    @Update
+    fun updateStorageUser(itemStorages: ItemStorageUser)
+
 
     // ItemBoard
     @Transaction
@@ -37,7 +71,7 @@ interface PostDao {
 
     @Transaction
     @Query("SELECT * FROM item_board")
-    fun findAllBoard(): LiveData<List<RelationScreenInBoard>>
+    fun findAllBoard(): LiveData<List<ItemBoard>>
 
     // ItemScreen
     @Transaction
@@ -48,25 +82,22 @@ interface PostDao {
     @Query("SELECT * FROM item_board")
     fun findAllScreen(): LiveData<List<RelationScreenInBoard>>
 
-
-    // CrossItemScreen
     @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addCrossRefItemScreen(crossRefItemScreen: CrossRefItemScreen)
+    @Query("SELECT * FROM item_screen")
+    fun findAllItemInScreen(): LiveData<List<RelationItemInScreen>>
 
     @Transaction
-    @Query("SELECT * FROM crossrefitemscreen WHERE id_item_user=(:idItemUser) AND id_screen=(:idScreen)")
-    fun findCrossItemScreen(idItemUser: Long, idScreen: Long): List<CrossRefItemScreen>?
+    @Query("SELECT * FROM item_screen WHERE id_screen=(:idScreen)")
+    fun findItemInScreen(idScreen:Long): LiveData<RelationItemInScreen>
 
-    @Transaction
-    fun addQty(crossRefItemScreen: CrossRefItemScreen){
-        if(findCrossItemScreen(crossRefItemScreen.itemID, crossRefItemScreen.screenID)?.size?:0 <= 0){
-            addCrossRefItemScreen(crossRefItemScreen)
-        }else{
-            updateCrossRefItemScreen(crossRefItemScreen)
+    fun findAdapterBoard(): List<RelationScreenInBoard>? {
+        val listBoard = findAllScreen()
+        val listScreen = listBoard.value?.get(0)?.screen
+        for (i in 0 until (listScreen?.size ?: 0)) {
+            val listStorage = findItemInScreen(listScreen?.get(i)?.idScreen ?: 0)
+            listScreen?.get(i)?.itemStorages = listStorage.value?.storageUser
+            listBoard.value?.get(0)?.screen?.get(i)?.itemStorages = listStorage.value?.storageUser
         }
+        return listBoard.value
     }
-    @Update
-    fun updateCrossRefItemScreen(crossRefItemScreen: CrossRefItemScreen)
-
 }

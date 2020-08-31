@@ -29,6 +29,7 @@
             tools:src="@mipmap/ic_launcher"
             />
         <TextView
+            android:id="@+id/tv_title_storage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/iv_cover_storage"
