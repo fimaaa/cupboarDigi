@@ -20,23 +20,36 @@ class AdapterScreen(
         const val VIEWTYPE_SCREEN = 1
         const val VIEWTYPE_ADD = 0
     }
-    var listScreen: List<ItemScreen>? = null
-    fun addData(listScreen: List<ItemScreen>?){
-        this.listScreen = listScreen
+    private var listScreen = mutableListOf<ItemScreen>()
+    fun changeData(listScreen: List<ItemScreen>){
+        this.listScreen = listScreen.toMutableList()
         notifyDataSetChanged()
     }
 
+    fun clearData(){
+        listScreen.clear()
+        notifyDataSetChanged()
+    }
+
+    fun addData(itemScreen: ItemScreen){
+        listScreen.add(itemScreen)
+        notifyDataSetChanged()
+    }
     class ViewHolderScreenStorage(private val binding: ItemScreenBoardBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(
+            listStorages:List<ItemStorageUser?>?,
             listenerEdit: (Int?) -> Unit,
             listenerItemClicked: (ItemStorageUser?) -> Unit
         ) {
-            binding.rcvItemScreen.adapter = AdapterStorageScreen(listenerItemClicked)
+            val adapter = AdapterStorageScreen(listenerItemClicked)
+            adapter.setListReward(listStorages)
+            binding.rcvItemScreen.adapter = adapter
         }
     }
 
-    class ViewHolderAddRecyclerView(private val binding: ItemAddItemBinding){
+    class ViewHolderAddRecyclerView(private val binding: ItemAddItemBinding) :
+        RecyclerView.ViewHolder(binding.root){
         fun bind(
             listenerAdd: () -> Unit
         ) {
@@ -47,7 +60,7 @@ class AdapterScreen(
     }
 
     override fun getItemViewType(position: Int): Int =
-        if(position >= itemCount){
+        if(position >= listScreen.size){
             VIEWTYPE_ADD
         }else{
             VIEWTYPE_SCREEN
@@ -60,8 +73,8 @@ class AdapterScreen(
     ): RecyclerView.ViewHolder =
         when(viewType){
             VIEWTYPE_ADD -> {
-                ViewHolderScreenStorage(
-                    ItemScreenBoardBinding.inflate(
+                ViewHolderAddRecyclerView(
+                    ItemAddItemBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -79,7 +92,7 @@ class AdapterScreen(
             }
         }
 
-    override fun getItemCount(): Int = listScreen?.size?.plus(1) ?: 1
+    override fun getItemCount(): Int = listScreen.size + 1
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder.itemViewType){
@@ -88,6 +101,7 @@ class AdapterScreen(
             }
             else -> {
                 (holder as ViewHolderScreenStorage).bind(
+                    listScreen[position].itemStorages,
                     listenerEdit,
                     listenerItemClicked
                 )

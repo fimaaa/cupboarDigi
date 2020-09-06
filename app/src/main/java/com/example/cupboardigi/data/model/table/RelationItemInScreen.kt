@@ -10,7 +10,7 @@ data class RelationItemInScreen (
     @Embedded val screen: ItemScreen,
     @Relation(
         parentColumn = "id_screen",
-        entityColumn = "id_item_user"
+        entityColumn = "id_screen_user"
     )
     val storageUser: List<ItemStorageUser>
 )

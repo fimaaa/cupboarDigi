@@ -5,6 +5,11 @@ import androidx.room.*
 import com.example.cupboardigi.data.model.item.*
 import com.example.cupboardigi.data.model.table.RelationItemInScreen
 import com.example.cupboardigi.data.model.table.RelationScreenInBoard
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.internal.wait
 
 @Dao
 interface PostDao {
@@ -89,15 +94,4 @@ interface PostDao {
     @Transaction
     @Query("SELECT * FROM item_screen WHERE id_screen=(:idScreen)")
     fun findItemInScreen(idScreen:Long): LiveData<RelationItemInScreen>
-
-    fun findAdapterBoard(): List<RelationScreenInBoard>? {
-        val listBoard = findAllScreen()
-        val listScreen = listBoard.value?.get(0)?.screen
-        for (i in 0 until (listScreen?.size ?: 0)) {
-            val listStorage = findItemInScreen(listScreen?.get(i)?.idScreen ?: 0)
-            listScreen?.get(i)?.itemStorages = listStorage.value?.storageUser
-            listBoard.value?.get(0)?.screen?.get(i)?.itemStorages = listStorage.value?.storageUser
-        }
-        return listBoard.value
-    }
 }

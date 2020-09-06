@@ -13,6 +13,6 @@ data class ItemStorageUser(
     val idItemUser: Long,
     @Embedded
     val idStorage: ItemStorage,
-    @ColumnInfo(name = "id_screen")
+    @ColumnInfo(name = "id_screen_user")
     val screenID: Long
 )

@@ -11,5 +11,5 @@ data class RelationScreenInBoard (
         parentColumn = "id_board",
         entityColumn = "id_board_in_screen"
     )
-    val screen: List<ItemScreen>
+    val listScreen: List<ItemScreen>
 )

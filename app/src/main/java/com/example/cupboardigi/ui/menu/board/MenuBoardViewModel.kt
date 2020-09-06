@@ -2,11 +2,10 @@ package com.example.cupboardigi.ui.menu.board
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.cupboardigi.base.BaseViewModel
 import com.example.cupboardigi.data.model.item.*
-import com.example.cupboardigi.data.model.table.RelationScreenInBoard
+import com.example.cupboardigi.data.model.table.RelationItemInScreen
 import com.example.cupboardigi.database.dao.PostDao
 import com.example.cupboardigi.ui.adapter.AdapterScreen
 import com.example.cupboardigi.ui.menu.ContainerMenuNavigator
@@ -18,19 +17,32 @@ class MenuBoardViewModel(
     private val storageDao: PostDao,
     application: Application
 ) : BaseViewModel<ContainerMenuNavigator>(application) {
-    val itemCupBoard =  MutableLiveData<List<RelationScreenInBoard>>()
-    var adapter: AdapterScreen? = null
+    val itemCupBoard = storageDao.findAllScreen()
+    fun getItem(listScreen: List<ItemScreen>){
+        adapter.clearData()
+        for(i in listScreen.indices){
+            getItemScreen(
+                listScreen[i].idScreen
+            ).observeForever{
+                val screen = it.screen
+                screen.itemStorages = it.storageUser
+                adapter.addData(screen)
 
-    init {
-        viewModelScope.launch {
-            addType()
-            addSeries()
-            addStorage()
-            addBoard()
-            addScreen()
-            addStorageUser()
+            }
         }
     }
+
+    var adapter: AdapterScreen = AdapterScreen(
+        {
+
+        },
+        {
+
+        },
+        {
+
+        })
+
     val itemType = listOf(
         ItemType(
             1,
@@ -72,6 +84,17 @@ class MenuBoardViewModel(
             ""
         )
     )
+
+    init {
+        viewModelScope.launch {
+//            addType()
+//            addSeries()
+//            addStorage()
+//            addBoard()
+//            addScreen()
+//            addStorageUser()
+        }
+    }
 
     suspend fun addSeries(){
         withContext(Dispatchers.IO){
@@ -115,7 +138,7 @@ class MenuBoardViewModel(
         withContext(Dispatchers.IO){
                 storageDao.addItemBoard(
                     ItemBoard(
-                        1L,
+                        1,
                         ""
                     )
                 )
@@ -124,12 +147,12 @@ class MenuBoardViewModel(
 
     suspend fun addScreen(){
         withContext(Dispatchers.IO){
-            for(i in 0 .. 3){
+            for(i in 1 .. 4){
                 storageDao.addItemScreen(
                     ItemScreen(
                         i.toLong(),
-                        1L,
-                        "",
+                        1,
+                        "asdasd-$i",
                         false
                     )
                 )
@@ -180,6 +203,10 @@ class MenuBoardViewModel(
                 )
             )
         }
+    }
+
+    private fun getItemScreen(idScreen: Long): LiveData<RelationItemInScreen>{
+        return storageDao.findItemInScreen(idScreen)
     }
 
 }
