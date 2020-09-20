@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="add_recyclerview">Add Recyclerview</string>
-    <string name="add_data_screen">Add Data Screen</string>
+    <string name="add_data_screen">Tamba Dataa Layat</string>
     <string name="name_screen">Name Screen :</string>
     <string name="cover_open">Cover Open</string>
     <string name="add_new_item">Add New Item</string>

@@ -10,7 +10,8 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorNaturalWood">#caa472</color>
     <color name="colorDarkWood">#b88645</color>
+    <color name="colorSteel">#4682b4</color>
 
-    <color name="colorTransparent">#80000000</color>
+    <color name="colorTransparent">#00000000</color>
 
 </resources>

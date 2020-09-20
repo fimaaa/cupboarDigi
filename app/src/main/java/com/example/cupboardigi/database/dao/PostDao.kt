@@ -5,11 +5,6 @@ import androidx.room.*
 import com.example.cupboardigi.data.model.item.*
 import com.example.cupboardigi.data.model.table.RelationItemInScreen
 import com.example.cupboardigi.data.model.table.RelationScreenInBoard
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.internal.wait
 
 @Dao
 interface PostDao {
@@ -32,6 +27,10 @@ interface PostDao {
     fun findAllItemSeries(): LiveData<List<ItemSeries>>
 
     // ItemStorage
+    @Transaction
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addStorage(ItemStorage: ItemStorage)
+
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addAllStorage(ItemStorage: List<ItemStorage>?)
@@ -82,6 +81,9 @@ interface PostDao {
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addItemScreen(itemScreen: ItemScreen)
+
+    @Update
+    fun updateItemScreen(itemScreen: ItemScreen)
 
     @Transaction
     @Query("SELECT * FROM item_board")

@@ -1,8 +1,8 @@
 package com.example.cupboardigi.ui.menu
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.example.cupboardigi.R
 import com.example.cupboardigi.animation.CubeInViewPager2
 import com.example.cupboardigi.base.BaseContainerFragment
@@ -18,20 +18,29 @@ class ContainerMenuFragment : BaseContainerFragment() {
     override fun onInitialization() {
         super.onInitialization()
         vp_container_menu.setPageTransformer(CubeInViewPager2())
-        vp_container_menu.adapter = ContainerMenuAdapter(requireActivity())
+        vp_container_menu.adapter = ContainerMenuAdapter(this)
         vp_container_menu.setCurrentItem(1, false)
         vp_container_menu.offscreenPageLimit = 3
+        vp_container_menu.isUserInputEnabled = false
+        vp_container_menu.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                vp_container_menu.isUserInputEnabled = position != 1
+            }
+        })
+
     }
 
-    private inner class ContainerMenuAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
+    private class ContainerMenuAdapter(parentFragment: Fragment) :
+        FragmentStateAdapter(parentFragment) {
         override fun getItemCount(): Int = 3
 
         override fun createFragment(position: Int): Fragment {
-            return when(position){
+            return when (position) {
                 0 -> {
                     MenuAccountFragment()
                 }
-                1 ->{
+                1 -> {
                     MenuBoardFragment()
                 }
                 else -> {
@@ -40,4 +49,10 @@ class ContainerMenuFragment : BaseContainerFragment() {
             }
         }
     }
+
+    fun goToPage(position: Int) {
+        vp_container_menu.setCurrentItem(position, true)
+    }
+
+
 }

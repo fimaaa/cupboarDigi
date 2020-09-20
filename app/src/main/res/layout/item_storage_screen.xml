@@ -4,6 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
+    <data>
+        <variable
+            name="imageCover"
+            type="String" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_root_storage_screen"
         android:layout_width="100dp"
@@ -34,26 +39,28 @@
             tools:src="@mipmap/ic_launcher"
             />
         <TextView
-            android:id="@+id/tv_title_storage"
+            android:id="@+id/tv_volume_storage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/iv_cover_storage"
-            app:layout_constraintBottom_toTopOf="@id/tv_volume_storage"
+            app:layout_constraintBottom_toTopOf="@id/tv_title_storage"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
+            android:padding="5dp"
             style="@style/title_small_light"
             android:gravity="center"
-            tools:text="One Piece"
+            tools:text="Vol.1"
             />
         <TextView
-            android:id="@+id/tv_volume_storage"
+            android:id="@+id/tv_title_storage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            style="@style/desc_small_light"
+            android:padding="5dp"
+            style="@style/desc_medium_light"
             android:gravity="center"
             android:layout_marginBottom="16dp"
-            tools:text="Vol.1"
+            tools:text="One Piece"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

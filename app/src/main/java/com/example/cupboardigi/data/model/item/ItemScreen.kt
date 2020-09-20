@@ -7,15 +7,15 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "item_screen")
 data class ItemScreen (
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_screen")
-    val idScreen: Long,
+    val idScreen: Long = 0,
     @ColumnInfo(name = "id_board_in_screen")
     val idBoardInScreen: Long,
     @ColumnInfo(name = "name_screen")
     val nameScreen: String,
     @ColumnInfo(name = "is_shown")
-    val isShown: Boolean
+    var isShown: Boolean
 ){
     @Ignore
     var itemStorages: List<ItemStorageUser>? = null
