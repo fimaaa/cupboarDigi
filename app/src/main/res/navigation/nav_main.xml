@@ -12,11 +12,24 @@
         tools:layout="@layout/fragment_splashscreen">
         <action
             android:id="@+id/action_SplashFragment_to_MainFragment"
-            app:destination="@id/MainFragment" />
+            app:destination="@id/MainFragment"
+            app:popUpTo="@id/MainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/MainFragment"
         android:name="com.example.cupboardigi.ui.menu.ContainerMenuFragment"
-        tools:layout="@layout/fragment_container_menu"/>
+        tools:layout="@layout/fragment_container_menu">
+        <action
+            android:id="@+id/action_MainFragment_to_itemListFragment"
+            app:destination="@id/itemListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemListFragment"
+        android:name="com.example.cupboardigi.ui.itemlist.ItemListFragment"
+        android:label="ItemListFragment"
+        tools:layout="@layout/fragment_itemlist"
+        />
+
 </navigation>

@@ -1,10 +1,13 @@
 package com.example.cupboardigi.data.model.item
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "item_board")
 data class ItemBoard(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_board")
     val idBoard: Long,
     @ColumnInfo(name = "name_board")

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "item_series")
 data class ItemSeries (
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_series")
     val idSeries: Long,
     @ColumnInfo(name = "name_series")

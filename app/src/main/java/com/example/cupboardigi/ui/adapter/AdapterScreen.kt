@@ -85,11 +85,11 @@ class AdapterScreen(
         ){
             if(isShown) {
                 val animation1: Animation =
-                    AnimationUtils.loadAnimation(mContext, R.anim.openscreen)
+                    AnimationUtils.loadAnimation(mContext, R.anim.out_from_right)
                 textView.startAnimation(animation1)
             } else {
                 val animation1: Animation =
-                    AnimationUtils.loadAnimation(mContext, R.anim.closescreen)
+                    AnimationUtils.loadAnimation(mContext, R.anim.in_from_left)
                 textView.startAnimation(animation1)
             }
         }

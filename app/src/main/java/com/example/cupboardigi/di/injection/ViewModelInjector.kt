@@ -1,6 +1,7 @@
 package com.example.cupboardigi.di.injection
 
 import com.example.cupboardigi.di.module.BasicNetworkModule
+import com.example.cupboardigi.ui.itemlist.ItemListViewModel
 import com.example.cupboardigi.ui.menu.ContainerMenuViewModel
 import com.example.cupboardigi.ui.menu.board.MenuBoardViewModel
 import com.example.cupboardigi.ui.splash.SplashViewModel
@@ -14,6 +15,7 @@ interface  ViewModelInjector {
     fun inject(containerMenuViewModel: ContainerMenuViewModel)
     fun inject(splashViewModel: SplashViewModel)
     fun inject(menuBoardViewModel: MenuBoardViewModel)
+    fun inject(itemListViewModel: ItemListViewModel)
 
 
     @Component.Builder

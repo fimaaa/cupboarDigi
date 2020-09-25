@@ -1,5 +1,6 @@
 package com.example.cupboardigi.ui.menu
 
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -28,7 +29,7 @@ class ContainerMenuFragment : BaseContainerFragment() {
                 vp_container_menu.isUserInputEnabled = position != 1
             }
         })
-
+        onBackFinishActivity()
     }
 
     private class ContainerMenuAdapter(parentFragment: Fragment) :
@@ -54,5 +55,17 @@ class ContainerMenuFragment : BaseContainerFragment() {
         vp_container_menu.setCurrentItem(position, true)
     }
 
+    private fun onBackFinishActivity() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (vp_container_menu.currentItem != 1) {
+                    goToPage(1)
+                } else {
+                    activity?.finish()
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+    }
 
 }

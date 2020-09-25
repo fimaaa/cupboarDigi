@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.example.cupboardigi.di.injection.DaggerViewModelInjector
 import com.example.cupboardigi.di.injection.ViewModelInjector
 import com.example.cupboardigi.di.module.BasicNetworkModule
+import com.example.cupboardigi.ui.itemlist.ItemListViewModel
 import com.example.cupboardigi.ui.menu.ContainerMenuViewModel
 import com.example.cupboardigi.ui.menu.board.MenuBoardViewModel
 import com.example.cupboardigi.ui.splash.SplashViewModel
@@ -30,7 +31,7 @@ abstract class BaseViewModel<N>(application: Application) : AndroidViewModel(app
             return mNavigator?.get()
         }
         set(value) {
-            mNavigator = WeakReference<N>(value) ?: null
+            mNavigator = WeakReference<N>(value)
         }
 
     private val injectorBasic: ViewModelInjector = DaggerViewModelInjector
@@ -50,6 +51,7 @@ abstract class BaseViewModel<N>(application: Application) : AndroidViewModel(app
             is ContainerMenuViewModel -> injectorBasic.inject(this)
             is SplashViewModel -> injectorBasic.inject(this)
             is MenuBoardViewModel -> injectorBasic.inject(this)
+            is ItemListViewModel -> injectorBasic.inject(this)
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.cupboardigi.ui.splash
 
+import androidx.lifecycle.Observer
 import com.example.cupboardigi.R
 import com.example.cupboardigi.base.BaseFragment
 import com.example.cupboardigi.databinding.FragmentSplashscreenBinding
@@ -17,7 +18,16 @@ class SplashFragment : BaseFragment<FragmentSplashscreenBinding, SplashViewModel
     }
 
     override fun onReadyAction() {
-        viewModel.displaySplash()
+        viewModel.itemType.observe(this, Observer {
+            viewModel.itemType.removeObservers(this)
+            if (it.isNullOrEmpty()) {
+                println("TAG AddItem")
+                viewModel.addItemType()
+            } else {
+                println("TAG Splash")
+                viewModel.displaySplash()
+            }
+        })
     }
 
     override fun goToLogin() {

@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "item_type")
 data class ItemType(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_type")
     val idType: Long,
     @ColumnInfo(name = "name_type")

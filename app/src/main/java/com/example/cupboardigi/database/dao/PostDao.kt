@@ -11,7 +11,7 @@ interface PostDao {
     // ItemType
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addItemType(itemType: ItemType)
+    fun addItemType(itemType: List<ItemType>)
 
     @Transaction
     @Query("SELECT * FROM item_type")
@@ -20,7 +20,7 @@ interface PostDao {
     // ItemSeries
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addItemSeries(itemSeries: List<ItemSeries>)
+    fun addItemSeries(itemSeries: ItemSeries)
 
     @Transaction
     @Query("SELECT * FROM item_series")
