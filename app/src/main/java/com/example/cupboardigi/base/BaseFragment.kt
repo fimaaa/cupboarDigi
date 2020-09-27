@@ -17,6 +17,7 @@ import com.example.cupboardigi.R
 import com.example.cupboardigi.di.injection.ViewModelFactory
 import com.example.cupboardigi.ui.itemlist.ItemListFragment
 import com.example.cupboardigi.ui.menu.board.MenuBoardFragment
+import com.example.cupboardigi.ui.myitem.MyItemFragment
 import com.example.cupboardigi.ui.splash.SplashFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -52,6 +53,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<out Any>> : F
             is MenuBoardFragment -> {{ViewModelFactory(requireActivity())}}
             is ItemListFragment -> {{ViewModelFactory(requireActivity())}}
             is SplashFragment -> {{ViewModelFactory(requireActivity())}}
+            is MyItemFragment -> {{ViewModelFactory(requireActivity())}}
             else -> null
         }
     }

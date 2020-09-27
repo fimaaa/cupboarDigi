@@ -24,12 +24,21 @@
         <action
             android:id="@+id/action_MainFragment_to_itemListFragment"
             app:destination="@id/itemListFragment" />
+        <action
+            android:id="@+id/action_MainFragment_to_myItemFragment"
+            app:destination="@id/myItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemListFragment"
         android:name="com.example.cupboardigi.ui.itemlist.ItemListFragment"
         android:label="ItemListFragment"
         tools:layout="@layout/fragment_itemlist"
+        />
+    <fragment
+        android:id="@+id/myItemFragment"
+        android:name="com.example.cupboardigi.ui.myitem.MyItemFragment"
+        android:label="MyItemFragment"
+        tools:layout="@layout/fragment_myitem_list"
         />
 
 </navigation>

@@ -31,4 +31,9 @@ class MenuListFragment : BaseFragment<FragmentMenuListBinding, MenuListViewModel
         val direction = ContainerMenuFragmentDirections.actionMainFragmentToItemListFragment()
         menuController?.navigate(direction)
     }
+
+    override fun goToMyItem() {
+        val direction = ContainerMenuFragmentDirections.actionMainFragmentToMyItemFragment()
+        menuController?.navigate(direction)
+    }
 }

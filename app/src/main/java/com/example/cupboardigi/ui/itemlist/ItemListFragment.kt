@@ -42,9 +42,6 @@ class ItemListFragment : BaseFragment<FragmentItemlistBinding, ItemListViewModel
                 dataBinding.layoutDatanotfoundItmelist.root.visibility = View.GONE
             }
         })
-        viewModel.allTypeItem.observe(this, Observer {
-            println("TAG Size TypeItem = ${it.size}")
-        })
     }
 
     override fun addSeries() {

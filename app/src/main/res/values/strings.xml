@@ -17,4 +17,6 @@
     <string name="minus">-</string>
     <string name="plus">+</string>
     <string name="already_end">Already End</string>
+    <string name="go_to_my_item">Go To My Item</string>
+    <string name="my_item">My Item</string>
 </resources>
